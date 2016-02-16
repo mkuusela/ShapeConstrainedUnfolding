@@ -2,13 +2,7 @@
 
 Matlab code for the paper M. Kuusela and P. B. Stark. Shape-constrained uncertainty quantification in unfolding steeply falling elementary particle spectra. [arXiv:1512.00905](http://arxiv.org/abs/1512.00905)
 
-Uses the following external functions:
-
--[parfor_progress](http://ch.mathworks.com/matlabcentral/fileexchange/32101-progress-monitor--progress-bar--that-works-with-parfor)
-
--[subplot_tight](http://ch.mathworks.com/matlabcentral/fileexchange/30884-controllable-tight-subplot/)
-
--[dashline](http://ch.mathworks.com/matlabcentral/fileexchange/1892-dashline)
+Uses the following external functions: [parfor_progress](http://ch.mathworks.com/matlabcentral/fileexchange/32101-progress-monitor--progress-bar--that-works-with-parfor), [subplot_tight](http://ch.mathworks.com/matlabcentral/fileexchange/30884-controllable-tight-subplot/) and [dashline](http://ch.mathworks.com/matlabcentral/fileexchange/1892-dashline)
 
 ## Contents
 ### Main files
@@ -44,5 +38,13 @@ Uses the following external functions:
 | logLikelihood.m | Log-likelihood for the spline fit |
 | makeFeasible.m | Adjusts the solution iteratively to make it feasible |
 | unfoldDAgostiniOneIter.m | One iteration of D'Agostini |
+
+### Directories
+
+| Directory | Description |
+| --- | --- |
+| data | Simulated inclusive jet data, generated using generateDataIncJets.m  |
+| figures | Figures for the paper, generated using plotPaper.m |
+| results | Saved results from running the scripts |
 
 ### Copyright (c) 2016 Mikael Kuusela and Philip B. Stark
