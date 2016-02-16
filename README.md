@@ -5,7 +5,9 @@ Matlab code for the paper M. Kuusela and P. B. Stark. Shape-constrained uncertai
 Uses the following external functions:
 
 -[parfor_progress](http://ch.mathworks.com/matlabcentral/fileexchange/32101-progress-monitor--progress-bar--that-works-with-parfor)
+
 -[subplot_tight](http://ch.mathworks.com/matlabcentral/fileexchange/30884-controllable-tight-subplot/)
+
 -[dashline](http://ch.mathworks.com/matlabcentral/fileexchange/1892-dashline)
 
 ## Contents
@@ -43,4 +45,4 @@ Uses the following external functions:
 | makeFeasible.m | Adjusts the solution iteratively to make it feasible |
 | unfoldDAgostiniOneIter.m | One iteration of D'Agostini |
 
-Copyright (c) 2016 Mikael Kuusela and Philip B. Stark
+### Copyright (c) 2016 Mikael Kuusela and Philip B. Stark
