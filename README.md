@@ -11,7 +11,7 @@ Uses the following external functions: [parfor_progress](http://ch.mathworks.com
 | --- | --- |
 | generateDataIncJets.m | Generates the data for the inclusive jet case study |
 | plotPaper.m | Generates the figures for the paper |
-| splineDemo.m | Spline fit for Figure 1 |
+| splineDemo.m | Shape-constrained spline fit, *used only for the demo of Figure 1* |
 | unfoldDAgostini.m | D'Agostini iteration |
 | unfoldDAgostiniCVVar.m | D'Agostini iteration with weighted crossvalidation |
 | unfoldIncJetsDAgostiniCoverage.m | Coverage study for D'Agostini with fixed stopping point |
@@ -20,7 +20,7 @@ Uses the following external functions: [parfor_progress](http://ch.mathworks.com
 | unfoldIncJetsSVDCoverageCVVar.m | Coverage study for SVD unfolding when regularization strength is chosen using weighted crossvalidation |
 | unfoldIncJetsStrictBounds.m | Shape-constrained strict bounds for the inclusive jet spectrum |
 | unfoldIncJetsStrictBoundsCoverage.m | Coverage study for shape-constrained strict bounds |
-| unfoldIncJetsStrictBoundsInit.m | Precomputes values for the strict bounds, needs to be run before the main script |
+| unfoldIncJetsStrictBoundsInit.m | Precomputes values for the strict bounds, *needs to be run before the main script* |
 | unfoldSVD.m | SVD unfolding |
 | unfoldStrictBounds.m | Unfolded confidence intervals using shape-constrained strict bounds |
 | unfoldStrictBoundsNoConOc.m | As above, but omits computing the conservatively discretized convex intervals |
