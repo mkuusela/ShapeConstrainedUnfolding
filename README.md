@@ -2,6 +2,8 @@
 
 Matlab code for the paper M. Kuusela and P. B. Stark (2016). Shape-constrained uncertainty quantification in unfolding steeply falling elementary particle spectra. [arXiv:1512.00905](http://arxiv.org/abs/1512.00905) [stat.AP]
 
+Tested on Matlab R2014a. Requires the Optimization Toolbox and the Curve Fitting Toolbox.
+
 Uses the following external functions: [parfor_progress](http://ch.mathworks.com/matlabcentral/fileexchange/32101-progress-monitor--progress-bar--that-works-with-parfor), [subplot_tight](http://ch.mathworks.com/matlabcentral/fileexchange/30884-controllable-tight-subplot/) and [dashline](http://ch.mathworks.com/matlabcentral/fileexchange/1892-dashline)
 
 ## Contents
