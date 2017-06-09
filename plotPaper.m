@@ -21,13 +21,13 @@ load(['./results/incJetsStrictBoundsUnfolded_lumFactor',num2str(lumFactor),'binM
 figure;
 hold on;
 
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor','none','EdgeColor','k');
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.90,0.90,1],'EdgeColor',[0.90,0.90,1]);
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.75,0.75,1],'EdgeColor',[0.75,0.75,1]);
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.45,0.45,1],'EdgeColor',[0.45,0.45,1]);
 
 for i = 1:nBinsE
@@ -55,8 +55,8 @@ set(gca,'Layer','top');
 xlim([lbE,ubE]);
 ylim([0,1.15*max(fGridE)]);
 box on;
-title('(a) Inclusive jet p_T spectrum, linear scale');
-xlabel('Transverse momentum p_T (GeV)');
+title('(a) Inclusive jet p_\perp spectrum, linear scale');
+xlabel('Transverse momentum p_\perp (GeV)');
 ylabel('Intensity (1/GeV)');
 legend('True','Positive','Positive + decreasing','Positive + decreasing + convex');
 set(gcf,'units','centimeters')
@@ -88,13 +88,13 @@ minLb = 1e-5;
 lbHPosOc(lbHPosOc <= minLb) = minLb;
 lbHMonOc(lbHMonOc <= minLb) = minLb;
 
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor','none','EdgeColor','k');
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.90,0.90,1],'EdgeColor',[0.90,0.90,1]);
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.75,0.75,1],'EdgeColor',[0.75,0.75,1]);
-h = bar(0,0,'style','histc');
+h = bar(0,0,'histc');
 set(h,'FaceColor',[0.45,0.45,1],'EdgeColor',[0.45,0.45,1]);
 
 for i = 1:nBinsE
@@ -122,8 +122,8 @@ set(gca,'Layer','top');
 xlim([lbE,ubE]);
 ylim([0.7*min(lbHConOc./binWidthsE),1.5*max(ubHPosOc./binWidthsE)]);
 box on;
-title('(b) Inclusive jet p_T spectrum, log scale');
-xlabel('Transverse momentum p_T (GeV)');
+title('(b) Inclusive jet p_\perp spectrum, log scale');
+xlabel('Transverse momentum p_\perp (GeV)');
 ylabel('Intensity (1/GeV)');
 legend('True','Positive','Positive + decreasing','Positive + decreasing + convex');
 set(gca,'YScale','log');
@@ -132,6 +132,25 @@ set(gcf,'pos',[0 0 15 10])
 set(gcf,'paperunits',get(gcf,'units')) 
 set(gcf,'paperpos',get(gcf,'pos'))
 print('-depsc2',['./figures/incJets_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'UnfoldedStrictBoundsLog.eps']);
+
+%% Strict bounds coverage studies
+
+nSamples = 1000;
+
+load(['./results/incJetsStrictBoundsCoverage_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'nSamples',num2str(nSamples),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat']);
+
+%disp(coverageBinWisePos);
+disp(coverageJointPos);
+[~,ci] = binofit(coverageJointPos*nSamples,nSamples);
+disp(ci);
+%disp(coverageBinWiseMon);
+disp(coverageJointMon);
+[~,ci] = binofit(coverageJointMon*nSamples,nSamples);
+disp(ci);
+%disp(coverageBinWiseCon);
+disp(coverageJointCon);
+[~,ci] = binofit(coverageJointCon*nSamples,nSamples);
+disp(ci);
 
 %% SVD, varying delta
 
@@ -240,9 +259,9 @@ box on;
 ylim([0.15,1]);
 title('(a) SVD, weighted CV');
 ylabel('Binwise coverage');
-xlabel('Transverse momentum p_T (GeV)');
+xlabel('Transverse momentum p_\perp (GeV)');
 
-dim = [0.376 0.25 0.465 0.168];
+dim = [0.375 0.25 0.466 0.168];
 str = ['Simultaneous coverage: ',num2str(coverageJointSVDPert,'%1.3f'),' (',num2str(jointCoverageLb,'%1.3f'),',',num2str(jointCoverageUb,'%1.3f'),')'];
 annotation('textbox',dim,'String',str,'BackgroundColor','w','HorizontalAlignment','center','FontSize',10);
 
@@ -251,6 +270,43 @@ set(gcf,'pos',[0 0 0.6*15 0.6*10])
 set(gcf,'paperunits',get(gcf,'units')) 
 set(gcf,'paperpos',get(gcf,'pos'))
 print('-depsc2',['./figures/incJets_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'CoverageCVVarSVD.eps']);
+
+%% SVD, CVVar (grayscale)
+
+nSamples = 1000;
+
+load(['./results/incJetsSVDCoverageCVVar_lumFactor',num2str(lumFactor),'nSamples',num2str(nSamples),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat']);
+
+[~,ci] = binofit(coverageBinWiseSVDPert*nSamples,nSamples);
+binWiseCoverageUb = ci(:,2);
+binWiseCoverageLb = ci(:,1);
+
+[~,ci] = binofit(coverageJointSVDPert*nSamples,nSamples);
+jointCoverageUb = ci(1,2);
+jointCoverageLb = ci(1,1);
+
+figure;
+hold on;
+line([lbE,ubE],[1-alpha,1-alpha],'LineStyle',':','Color','k','LineWidth',1);
+h = bar(binsE(1:end-1),coverageBinWiseSVDPert,'style','histc');
+set(h,'FaceColor','none','EdgeColor',[0.2,0.2,0.2]);
+errorbar((binsE(1:end-1)+binsE(2:end))/2,coverageBinWiseSVDPert,coverageBinWiseSVDPert-binWiseCoverageLb,binWiseCoverageUb-coverageBinWiseSVDPert,'Color',[0.2,0.2,0.2],'LineStyle','none');
+hold off;
+box on;
+ylim([0.15,1]);
+title('(a) SVD, weighted CV');
+ylabel('Binwise coverage');
+xlabel('Transverse momentum p_\perp (GeV)');
+
+dim = [0.375 0.25 0.466 0.168];
+str = ['Simultaneous coverage: ',num2str(coverageJointSVDPert,'%1.3f'),' (',num2str(jointCoverageLb,'%1.3f'),',',num2str(jointCoverageUb,'%1.3f'),')'];
+annotation('textbox',dim,'String',str,'BackgroundColor','w','HorizontalAlignment','center','FontSize',10);
+
+set(gcf,'units','centimeters')
+set(gcf,'pos',[0 0 0.6*15 0.6*10])
+set(gcf,'paperunits',get(gcf,'units')) 
+set(gcf,'paperpos',get(gcf,'pos'))
+print('-depsc2',['./figures/incJets_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'CoverageCVVarSVD_bw.eps']);
 
 %% D'Agostini, CVVar
 
@@ -285,9 +341,9 @@ box on;
 ylim([0.55,1]);
 title('(b) D''Agostini iteration, weighted CV');
 ylabel('Binwise coverage');
-xlabel('Transverse momentum p_T (GeV)');
+xlabel('Transverse momentum p_\perp (GeV)');
 
-dim = [0.376 0.25 0.465 0.168];
+dim = [0.375 0.25 0.466 0.168];
 str = ['Simultaneous coverage: ',num2str(coverageJointDAgostiniPert,'%1.3f'),' (',num2str(jointCoverageLb,'%1.3f'),',',num2str(jointCoverageUb,'%1.3f'),')'];
 annotation('textbox',dim,'String',str,'BackgroundColor','w','HorizontalAlignment','center');
 
@@ -299,7 +355,54 @@ set(gcf,'paperunits',get(gcf,'units'))
 set(gcf,'paperpos',get(gcf,'pos'))
 print('-depsc2',['./figures/incJets_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'CoverageCVVarDAgostini.eps']);
 
-%% Figure for the introduction
+%% D'Agostini, CVVar (grayscale)
+
+nSamples = 1000;
+
+load(['./results/incJetsDAgostiniCoverageCVVar_lumFactor',num2str(lumFactor),'nSamples',num2str(nSamples),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat']);
+
+% Discard runs where the minimum of the CV curve was not found
+idx = find(nIterHat == 20000);
+coverBinWiseDAgostiniPert(:,idx) = [];
+coverJointDAgostiniPert(idx) = [];
+coverageBinWiseDAgostiniPert = mean(coverBinWiseDAgostiniPert,2);
+coverageJointDAgostiniPert = mean(coverJointDAgostiniPert);
+nSamples = nSamples - length(idx);
+
+[~,ci] = binofit(sum(coverBinWiseDAgostiniPert,2),nSamples);
+binWiseCoverageUb = ci(:,2);
+binWiseCoverageLb = ci(:,1);
+
+[~,ci] = binofit(sum(coverJointDAgostiniPert),nSamples);
+jointCoverageUb = ci(1,2);
+jointCoverageLb = ci(1,1);
+
+figure;
+hold on;
+line([lbE,ubE],[1-alpha,1-alpha],'LineStyle',':','Color','k','LineWidth',1);
+h = bar(binsE(1:end-1),coverageBinWiseDAgostiniPert,'style','histc');
+set(h,'FaceColor','none','EdgeColor',[0.2,0.2,0.2]);
+errorbar((binsE(1:end-1)+binsE(2:end))/2,coverageBinWiseDAgostiniPert,coverageBinWiseDAgostiniPert-binWiseCoverageLb,binWiseCoverageUb-coverageBinWiseDAgostiniPert,'Color',[0.2,0.2,0.2],'LineStyle','none');
+hold off;
+box on;
+ylim([0.55,1]);
+title('(b) D''Agostini iteration, weighted CV');
+ylabel('Binwise coverage');
+xlabel('Transverse momentum p_\perp (GeV)');
+
+dim = [0.375 0.25 0.466 0.168];
+str = ['Simultaneous coverage: ',num2str(coverageJointDAgostiniPert,'%1.3f'),' (',num2str(jointCoverageLb,'%1.3f'),',',num2str(jointCoverageUb,'%1.3f'),')'];
+annotation('textbox',dim,'String',str,'BackgroundColor','w','HorizontalAlignment','center');
+
+set(gca,'YTick',0.6:0.1:1);
+
+set(gcf,'units','centimeters')
+set(gcf,'pos',[0 0 0.6*15 0.6*10])
+set(gcf,'paperunits',get(gcf,'units')) 
+set(gcf,'paperpos',get(gcf,'pos'))
+print('-depsc2',['./figures/incJets_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'CoverageCVVarDAgostini_bw.eps']);
+
+%% Figures for the introduction
 
 load('./results/splineDemo.mat')
 
@@ -316,12 +419,14 @@ box on;
 
 h = legend('True','Unregularized','Positive + decreasing + convex');
 set(h,'FontSize',8);
-title('(a) Regularization with shape constraints')
+title('Regularization with shape constraints')
+xlabel('Transverse momentum p_\perp (GeV)');
+ylabel('Intensity (1/GeV)');
 
 set(gca,'Layer','top');
 
 set(gcf,'units','centimeters')
-set(gcf,'pos',[0 0 0.6*15 0.6*10])
+set(gcf,'pos',[0 0 0.7*15 0.7*10])
 set(gcf,'paperunits',get(gcf,'units')) 
 set(gcf,'paperpos',get(gcf,'pos'))
 print('-depsc2','./figures/incJetsIntro1.eps');
@@ -349,15 +454,82 @@ box on;
 
 h = legend('True','Positive + decreasing + convex');
 set(h,'FontSize',8);
-title('(b) Uncertainty quantification with strict bounds')
+title('Uncertainty quantification with strict bounds')
+xlabel('Transverse momentum p_\perp (GeV)');
+ylabel('Intensity (1/GeV)');
 
 set(gca,'Layer','top');
 
 set(gcf,'units','centimeters')
-set(gcf,'pos',[0 0 0.6*15 0.6*10])
+set(gcf,'pos',[0 0 0.7*15 0.7*10])
 set(gcf,'paperunits',get(gcf,'units')) 
 set(gcf,'paperpos',get(gcf,'pos'))
 print('-depsc2','./figures/incJetsIntro2.eps');
+
+%% Figures for the introduction (grayscale)
+
+load('./results/splineDemo.mat')
+
+figure;
+hold on;
+
+plot(gridE,fGridE,':k','LineWidth',1);
+plot(gridE,fHatUncGridE,'-','Color',[0.7,0.7,0.7],'LineWidth',0.5);
+plot(gridE,fHatConGridE,'--','Color',[0.4,0.4,0.4],'LineWidth',1);
+
+hold off;
+ylim([-2500,1.65e4]);
+box on;
+
+h = legend('True','Unregularized','Positive + decreasing + convex');
+set(h,'FontSize',8);
+title('Regularization with shape constraints')
+xlabel('Transverse momentum p_\perp (GeV)');
+ylabel('Intensity (1/GeV)');
+
+set(gca,'Layer','top');
+
+set(gcf,'units','centimeters')
+set(gcf,'pos',[0 0 0.7*15 0.7*10])
+set(gcf,'paperunits',get(gcf,'units')) 
+set(gcf,'paperpos',get(gcf,'pos'))
+print('-depsc2','./figures/incJetsIntro1_bw.eps');
+
+
+load(['./results/incJetsStrictBoundsUnfolded_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'MPos',num2str(MPos),'MMon',num2str(MMon),'MCon',num2str(MCon),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat']);
+
+figure;
+hold on;
+
+h = bar(0,0,'style','histc');
+set(h,'FaceColor','none','EdgeColor','k');
+h = bar(0,0,'style','histc');
+grayCol = 0.7;
+set(h,'FaceColor',[grayCol,grayCol,grayCol],'EdgeColor',[grayCol,grayCol,grayCol]);
+
+for i = 1:nBinsE
+    rectangle('Position',[binsE(i),lbHConOc(i)/binWidthsE(i),binWidthsE(i),ubHConOc(i)/binWidthsE(i)-lbHConOc(i)/binWidthsE(i)],'FaceColor',[grayCol,grayCol,grayCol],'EdgeColor','none');
+end
+h = bar(binsE(1:end-1),fBinsE./binWidthsE,'style','histc');
+set(h,'FaceColor','none','EdgeColor','k','LineWidth',0.3);
+plot(gridE,fGridE,'k');
+hold off;
+ylim([0,1.5e4]);
+box on;
+
+h = legend('True','Positive + decreasing + convex');
+set(h,'FontSize',8);
+title('Uncertainty quantification with strict bounds')
+xlabel('Transverse momentum p_\perp (GeV)');
+ylabel('Intensity (1/GeV)');
+
+set(gca,'Layer','top');
+
+set(gcf,'units','centimeters')
+set(gcf,'pos',[0 0 0.7*15 0.7*10])
+set(gcf,'paperunits',get(gcf,'units')) 
+set(gcf,'paperpos',get(gcf,'pos'))
+print('-depsc2','./figures/incJetsIntro2_bw.eps');
 
 %% Dual constraints
 

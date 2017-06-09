@@ -10,7 +10,7 @@ MPos = 30;
 MMon = 15;
 MCon = 10;
 
-load(['./data/incJetsData_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'.mat']);
+load(['./data/flatData_lumFactor',num2str(lumFactor),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'.mat']);
 load(['./results/incJetsStrictBoundsUnfolded_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'_init.mat']);
 
 nSamples = 1000;
@@ -68,4 +68,4 @@ coverageJointMon = mean(coverJointMon,2);
 coverageBinWiseCon = mean(coverBinWiseCon,2);
 coverageJointCon = mean(coverJointCon,2);
 
-save(['./results/incJetsStrictBoundsCoverage_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'nSamples',num2str(nSamples),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat'],'coverageBinWisePos','coverageJointPos','coverageBinWiseMon','coverageJointMon','coverageBinWiseCon','coverageJointCon','lbHPosUc','lbHPosOc','lbHMonUc','lbHMonOc','lbHConUc','lbHConOc','ubHPosUc','ubHPosOc','ubHMonUc','ubHMonOc','ubHConUc','ubHConOc');
+save(['./results/flatStrictBoundsCoverage_lumFactor',num2str(lumFactor),'binMultiplier',num2str(binMultiplier),'nSamples',num2str(nSamples),'nBinsE',num2str(nBinsE),'nBinsF',num2str(nBinsF),'alpha',num2str(alpha),'.mat'],'coverageBinWisePos','coverageJointPos','coverageBinWiseMon','coverageJointMon','coverageBinWiseCon','coverageJointCon','lbHPosUc','lbHPosOc','lbHMonUc','lbHMonOc','lbHConUc','lbHConOc','ubHPosUc','ubHPosOc','ubHMonUc','ubHMonOc','ubHConUc','ubHConOc');
